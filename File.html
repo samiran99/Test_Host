@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Be My Valentine ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #ffe6e6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      color: #cc0000;
+      font-size: 2rem;
+      padding: 0 20px;
+    }
+
+    #container {
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+    }
+
+    button {
+      padding: 18px 28px;
+      font-size: 1.2rem;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    #yesBtn {
+      background: #ff4d4d;
+      color: white;
+    }
+
+    #noBtn {
+      background: #777;
+      color: white;
+      position: absolute;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      position: relative;
+      height: 200px;
+    }
+
+    .love {
+      font-size: 2.5rem;
+      color: red;
+      animation: pulse 1s infinite;
+      padding: 20px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="container">
+  <h1>Will you be my Valentine? 💘</h1>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn" style="top: 80px; left: 120px;">No 😒</button>
+  </div>
+</div>
+
+<script>
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const container = document.getElementById("container");
+
+  let yesScale = 1;
+  let noTexts = [
+    "Are you sure?",
+    "Really?",
+    "Come on 😭",
+    "Don’t do this",
+    "Last chance 😏",
+    "Okay wow"
+  ];
+  let noCount = 0;
+
+  function moveNoButton() {
+    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = `${x}px`;
+    noBtn.style.top = `${y}px`;
+  }
+
+  noBtn.addEventListener("touchstart", () => {
+    yesScale += 0.25;
+    yesBtn.style.transform = `scale(${yesScale})`;
+
+    noBtn.textContent = noTexts[Math.min(noCount, noTexts.length - 1)];
+    noCount++;
+
+    moveNoButton();
+  });
+
+  yesBtn.addEventListener("click", () => {
+    document.body.innerHTML = `
+      <div class="love">
+        Hehe, I knew it ❤️<br><br>
+        I love you baby 💕
+      </div>
+    `;
+  });
+</script>
+
+</body>
+</html>
